@@ -158,7 +158,7 @@ function loadFactorsPage() {
   container.innerHTML = `
 
   <h2><b>Starting Point: ${startingPoint} years</b></h2>
-  <h3>Range: ${rangeMin} – ${rangeMax} years</h3>
+  <h2><b>Range: ${rangeMin} – ${rangeMax} years</b></h2>
 
   <p><b>Instructions:</b></p>
   <p>Enter percentage adjustments. Use positive numbers only. Aggravating factors increase the sentence and mitigating factors decrease the sentence.</p>
@@ -237,21 +237,22 @@ function loadCreditPage() {
 
   container.innerHTML = `
     <h2>Sentence Reduction/Addition</h2>
-    <p>Input only positive numbers. Sentence reduced for credit, increased for debit.</p>
+    <p><b>Instructions:</b></p>
+    <p>Input positive numbers only. </p>
 
-    <p>Guilty plea (Sentence REDUCTION) %</p>
+    <p>Guilty plea: Sentence REDUCTION %</p>
     <input id="guilty" type="number">
     <p>Reasoning:</p><textarea></textarea>
 
-    <p>Sentencing for other offences (Sentence ADDITION) %</p>
+    <p>Sentencing for other offences: Sentence ADDITION %</p>
     <input id="other" type="number">
     <p>Reasoning:</p><textarea></textarea>
 
-    <p>Time spent on remand for offence (Sentence REDUDCTION) %</p>
+    <p>Time spent on remand for offence: Sentence REDUDCTION %</p>
     <input id="remand" type="number">
     <p>Reasoning:</p><textarea></textarea>
 
-    <p>Ancillary and restraining orders, confiscation, compensation, etc, (Sentence ADDITION) %</p>
+    <p>Ancillary and restraining orders, confiscation, compensation, etc,.: Sentence ADDITION %</p>
     <input id="ancillary" type="number">
     <p>Reasoning:</p><textarea></textarea>
 
