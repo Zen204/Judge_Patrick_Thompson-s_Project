@@ -369,6 +369,7 @@ ${data.consequenceFactors.map(x => `<li>${x}</li>`).join("")}
 ${data.seriousnessFactors.map(x => `<li>${x}</li>`).join("")}
 </ul>
 
+<b></b>
 <h3>Adjustments</h3>
 
 <p>Offence aggravating: ${aggOff}%</p>
