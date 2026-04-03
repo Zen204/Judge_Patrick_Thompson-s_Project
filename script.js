@@ -137,29 +137,96 @@ container.innerHTML += `
 
 // ---------------- FACTORS ----------------
 function loadFactorsPage() {
+
+  const MAX = 30;
+
+  let category = getCategory(data.consequence);
+  let level = getLevel(data.seriousness);
+
+  let selected = grid[category][level];
+
+  let startingPoint = (selected.start * MAX).toFixed(2);
+  let rangeMin = (selected.min * MAX).toFixed(2);
+  let rangeMax = (selected.max * MAX).toFixed(2);
+
   let container = document.getElementById("factorsPage");
 
   container.innerHTML = `
-    <h2><b>Starting Point: 10</b></h2>
-    <h3>Range: 5-20</h3>
 
-    <p>Offence Aggravating Factors %</p>
-    <input id="aggOff" type="number">
-    <p>Reasoning:</p><textarea></textarea>
+  <h2><b>Starting Point: ${startingPoint} years</b></h2>
+  <h3>Range: ${rangeMin} – ${rangeMax} years</h3>
 
-    <p>Offence Mitigating Factors %</p>
-    <input id="mitOff" type="number">
-    <p>Reasoning:</p><textarea></textarea>
+  <p><b>Instructions:</b></p>
+  <ul>
+  <li>Enter percentage adjustments.</li>
+  <li>Use positive numbers only.</li>
+  <li>Aggravating factors increase the sentence.</li>
+  <li>Mitigating factors decrease the sentence.</li>
+  <li>Example: entering 10 means a 10% change.</li>
+  </ul>
 
-    <p>Offender Aggravating Factors %</p>
-    <input id="aggOffender" type="number">
-    <p>Reasoning:</p><textarea></textarea>
+  <h3>Offence Aggravating Factors %</h3>
 
-    <p>Offender Mitigating Factors %</p>
-    <input id="mitOffender" type="number">
-    <p>Reasoning:</p><textarea></textarea>
+  <ul>
+  <li>Firearm modified to make it more dangerous</li>
+  <li>Position of authority abused</li>
+  <li>Steps taken to prevent reporting</li>
+  <li>Possession motivated by revenge</li>
+  <li>Possession over sustained time</li>
+  <li>Attempt to conceal or dispose evidence</li>
+  <li>Firearm unrecovered</li>
+  </ul>
 
-    <button onclick="loadCreditPage()">Next</button>
+  <input id="aggOff" type="number">
+
+  <p>Reasoning:</p>
+  <textarea id="aggOffReason"></textarea>
+
+  <h3>Offence Mitigating Factors %</h3>
+
+  <ul>
+  <li>Voluntary surrender of firearm</li>
+  <li>Belief firearm did not require licence</li>
+  <li>Mistaken belief item not firearm</li>
+  <li>Coercion or intimidation</li>
+  <li>Serious medical condition</li>
+  </ul>
+
+  <input id="mitOff" type="number">
+
+  <p>Reasoning:</p>
+  <textarea id="mitOffReason"></textarea>
+
+  <h3>Offender Aggravating Factors %</h3>
+
+  <ul>
+  <li>Previous firearm convictions</li>
+  <li>Relevant criminal history</li>
+  <li>Offence committed while on bail</li>
+  </ul>
+
+  <input id="aggOffender" type="number">
+
+  <p>Reasoning:</p>
+  <textarea id="aggOffenderReason"></textarea>
+
+  <h3>Offender Mitigating Factors %</h3>
+
+  <ul>
+  <li>Good character</li>
+  <li>Genuine remorse</li>
+  <li>Disability or ill-health</li>
+  <li>Steps taken to address behaviour</li>
+  <li>Youth or lack of maturity</li>
+  <li>Assistance to authorities</li>
+  </ul>
+
+  <input id="mitOffender" type="number">
+
+  <p>Reasoning:</p>
+  <textarea id="mitOffenderReason"></textarea>
+
+  <button onclick="loadCreditPage()">Next</button>
   `;
 
   nextPage();
