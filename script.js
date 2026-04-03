@@ -224,7 +224,7 @@ function loadFactorsPage() {
 
   <p>Reasoning:</p>
   <textarea id="aggOffReason"></textarea>
-
+<br> </br>
   <h3>Offence Mitigating Factors %</h3>
 
   <ul>
@@ -239,7 +239,7 @@ function loadFactorsPage() {
 
   <p>Reasoning:</p>
   <textarea id="mitOffReason"></textarea>
-
+<br> </br>
   <h3>Offender Aggravating Factors %</h3>
 
   <ul>
@@ -252,7 +252,7 @@ function loadFactorsPage() {
 
   <p>Reasoning:</p>
   <textarea id="aggOffenderReason"></textarea>
-<br></br>
+<br> </br>
   <h3>Offender Mitigating Factors %</h3>
 
   <ul>
@@ -298,7 +298,7 @@ function loadCreditPage() {
     <h2>Sentence Reduction/Addition</h2>
     <p><b>Instructions:</b></p>
     <p>Input positive numbers only. </p>
-<br> </br>
+<p> </p>
     <p>Guilty plea: Sentence REDUCTION %</p>
     <input id="guilty" type="number">
     <p>Reasoning:</p><textarea></textarea>
@@ -464,7 +464,7 @@ ${data.seriousnessFactors.map(x => `<li>${x}</li>`).join("")}
 <p>Remand credit: ${remand}%</p>
 <p>Ancillary orders debit: ${ancillary}%</p>
 
-<h2>User Reasoning</h2>
+<h2>User Input</h2>
 
 <h3>Consequence Reasoning</h3>
 <p>${data.consequenceReason}</p>
