@@ -297,21 +297,21 @@ function loadCreditPage() {
   container.innerHTML = `
     <h2>Sentence Reduction/Addition</h2>
     <p><b>Instructions:</b></p>
-    <p>Input positive numbers only. </p>
+    <p>Enter percentage adjustments. Use positive numbers only.  </p>
 <p> </p>
-    <p>Guilty plea: Sentence REDUCTION %</p>
+    <h3>Guilty plea: Sentence REDUCTION %</h3>
     <input id="guilty" type="number">
     <p>Reasoning:</p><textarea></textarea>
 
-    <p>Sentencing for other offences: Sentence ADDITION %</p>
+    <h3>Sentencing for other offences: Sentence ADDITION %</h3>
     <input id="other" type="number">
     <p>Reasoning:</p><textarea></textarea>
 
-    <p>Time spent on remand for offence: Sentence REDUCTION %</p>
+    <h3>Time spent on remand for offence: Sentence REDUCTION %</h3>
     <input id="remand" type="number">
     <p>Reasoning:</p><textarea></textarea>
 
-    <p>Ancillary and restraining orders, confiscation, compensation, etc,.: Sentence ADDITION %</p>
+    <h3>Ancillary and restraining orders, confiscation, compensation, etc.: Sentence ADDITION %</h3>
     <input id="ancillary" type="number">
     <p>Reasoning:</p><textarea></textarea>
 
