@@ -1,20 +1,20 @@
 let currentPage = 0;
 const pages = document.querySelectorAll(".page");
 const grid = {
-  1: { // Category 1
-    A: { start: 0.75, min: 0.60, max: 0.90 },
-    B: { start: 0.65, min: 0.50, max: 0.80 },
-    C: { start: 0.50, min: 0.35, max: 0.65 }
+  1: { // Highest consequence
+    A: { start: 9/10, min: 7/10, max: 10/10 },  // High seriousness
+    B: { start: 6/10, min: 5/10, max: 7/10 },   // Medium seriousness
+    C: { start: 3/10, min: 1/10, max: 5/10 }    // Lesser seriousness
   },
-  2: { // Category 2
-    A: { start: 0.65, min: 0.50, max: 0.80 },
-    B: { start: 0.50, min: 0.35, max: 0.65 },
-    C: { start: 0.40, min: 0.25, max: 0.55 }
+  2: { // High consequence
+    A: { start: 6/10, min: 5/10, max: 7/10 },
+    B: { start: 5.5/10, min: 5/10, max: 6/10 },
+    C: { start: 3/10, min: 1/10, max: 5/10 }
   },
-  3: { // Category 3
-    A: { start: 0.50, min: 0.35, max: 0.65 },
-    B: { start: 0.40, min: 0.25, max: 0.55 },
-    C: { start: 0.30, min: 0.00, max: 0.45 }
+  3: { // Lesser consequence
+    A: { start: 3/10, min: 2/10, max: 5/10 },
+    B: { start: 2.5/10, min: 2/10, max: 4/10 },
+    C: { start: 2/10, min: 1/10, max: 4/10 }
   }
 };
 
@@ -87,22 +87,22 @@ function loadConsequencePage() {
 
   container.innerHTML = `<h2>Check all that apply</h2>`;
 
-container.innerHTML += `<div class="section">`;
+  container.innerHTML += `<div class="section">`;
 
-options[value.value].forEach(opt => {
-  container.innerHTML += `<label><input type="checkbox" class="consequenceBox"> ${opt}</label>`;
-});
+  options[value.value].forEach(opt => {
+    container.innerHTML += `<label><input type="checkbox" class="consequenceBox"> ${opt}</label>`;
+  });
 
-container.innerHTML += `</div>`;
+  container.innerHTML += `</div>`;
 
-container.innerHTML += `
-  <div class="section">
-    <p>Explain your reasoning:</p>
-    <textarea id="consequenceReason"></textarea>
-  </div>
+  container.innerHTML += `
+    <div class="section">
+      <p>Explain your reasoning:</p>
+      <textarea id="consequenceReason"></textarea>
+    </div>
 
-<button onclick="saveConsequence()">Next</button>
-`;
+  <button onclick="saveConsequence()">Next</button>
+  `;
   nextPage();
 }
 
@@ -155,18 +155,18 @@ function loadSeriousnessPage() {
 
   container.innerHTML = `<h2>Check all that apply</h2>`;
 
-options[value.value].forEach(opt => {
-  container.innerHTML += `<label><input type="checkbox" class="seriousnessBox"> ${opt}</label>`;
-});
+  options[value.value].forEach(opt => {
+    container.innerHTML += `<label><input type="checkbox" class="seriousnessBox"> ${opt}</label>`;
+  });
 
-container.innerHTML += `
-  <div class="section">
-    <p>Explain your reasoning:</p>
-    <textarea></textarea>
-  </div>
+  container.innerHTML += `
+    <div class="section">
+      <p>Explain your reasoning:</p>
+      <textarea></textarea>
+    </div>
 
-  <button onclick="saveSeriousness()">Next</button>
-`;
+    <button onclick="saveSeriousness()">Next</button>
+  `;
 
   nextPage();
 }
@@ -205,66 +205,67 @@ function loadFactorsPage() {
   <h2><b>Range: ${rangeMin} – ${rangeMax} years</b></h2>
 
   <p><b>Instructions:</b></p>
-  <p>Enter “X” percentage adjustments for the sentence. Use positive numbers only.</p>
-  
+  <p>Enter a percentage adjustment (0–max) for each category. Use positive numbers only.</p>
+
 
   <h3>Increase by X% for offence aggravating factors:</h3>
 
   <ul>
-  <li>Firearm modified to make it more dangerous</li>
-  <li>Position of authority abused</li>
-  <li>Steps taken to prevent reporting</li>
-  <li>Possession motivated by revenge</li>
-  <li>Possession over sustained time</li>
-  <li>Attempt to conceal or dispose evidence</li>
-  <li>Firearm unrecovered</li>
+  <li>Firearm modified to make it more dangerous <em>(max 7%)</em></li>
+  <li>Position of authority abused <em>(max 6%)</em></li>
+  <li>Steps taken to prevent reporting <em>(max 7%)</em></li>
+  <li>Possession motivated by revenge <em>(max 7%)</em></li>
+  <li>Possession over sustained time <em>(max 7%)</em></li>
+  <li>Attempt to conceal or dispose evidence <em>(max 6%)</em></li>
+  <li>Firearm unrecovered <em>(max 7%)</em></li>
   </ul>
 
-  <input id="aggOff" type="number">
+  <input id="aggOff" type="number" min="0" max="7" placeholder="0–7">
 
   <p>Reasoning:</p>
   <textarea id="aggOffReason"></textarea>
-<br> </br>
+<br></br>
   <h3>Reduce by X% for offence mitigating factors:</h3>
 
   <ul>
-  <li>Voluntary surrender of firearm</li>
-  <li>Belief firearm did not require licence</li>
-  <li>Mistaken belief item not firearm</li>
-  <li>Coercion or intimidation</li>
-  <li>Serious medical condition</li>
+  <li>Voluntary surrender of firearm <em>(max 8%)</em></li>
+  <li>Belief firearm did not require licence <em>(max 7%)</em></li>
+  <li>Mistaken belief item not firearm <em>(max 8%)</em></li>
+  <li>Coercion or intimidation <em>(max 7%)</em></li>
+  <li>Serious medical condition <em>(max 7%)</em></li>
   </ul>
 
-  <input id="mitOff" type="number">
+  <input id="mitOff" type="number" min="0" max="8" placeholder="0–8">
 
   <p>Reasoning:</p>
   <textarea id="mitOffReason"></textarea>
-<br> </br>
+<br></br>
   <h3>Increase by X% for offender aggravating factors:</h3>
 
   <ul>
-  <li>Previous firearm convictions</li>
-  <li>Relevant criminal history</li>
-  <li>Offence committed while on bail</li>
+  <li>Previous firearm convictions <em>(max 8%)</em></li>
+  <li>Relevant criminal history <em>(max 7%)</em></li>
+  <li>Offence committed while on bail <em>(max 7%)</em></li>
   </ul>
 
-  <input id="aggOffender" type="number">
+  <input id="aggOffender" type="number" min="0" max="8" placeholder="0–8">
 
   <p>Reasoning:</p>
   <textarea id="aggOffenderReason"></textarea>
-<br> </br>
+<br></br>
   <h3>Reduce by X% for offender mitigating factors:</h3>
 
   <ul>
-  <li>Good character</li>
-  <li>Genuine remorse</li>
-  <li>Disability or ill-health</li>
-  <li>Steps taken to address behaviour</li>
-  <li>Youth or lack of maturity</li>
-  <li>Assistance to authorities</li>
+  <li>Good character <em>(max 7%)</em></li>
+  <li>Genuine remorse <em>(max 7%)</em></li>
+  <li>Disability or ill-health <em>(max 7%)</em></li>
+  <li>Steps taken to address behaviour <em>(max 7%)</em></li>
+  <li>Youth or lack of maturity <em>(max 8%)</em></li>
+  <li>Assistance to authorities <em>(max 9%)</em></li>
+  <li>No previous convictions <em>(max 6%)</em></li>
   </ul>
 
-  <input id="mitOffender" type="number">
+  <input id="mitOffender" type="number" min="0" max="9" placeholder="0–9">
 
   <p>Reasoning:</p>
   <textarea id="mitOffenderReason"></textarea>
@@ -287,6 +288,12 @@ function saveFactors(){
   data.aggOffenderReason = document.getElementById("aggOffenderReason").value;
   data.mitOffenderReason = document.getElementById("mitOffenderReason").value;
 
+  // Clamp values to their documented maximums in case browser validation was bypassed
+  if (data.aggOff > 7)      { alert("Offence aggravating cannot exceed 7%"); return; }
+  if (data.mitOff > 8)      { alert("Offence mitigating cannot exceed 8%"); return; }
+  if (data.aggOffender > 8) { alert("Offender aggravating cannot exceed 8%"); return; }
+  if (data.mitOffender > 9) { alert("Offender mitigating cannot exceed 9%"); return; }
+
   loadCreditPage();
 }
 
@@ -297,23 +304,31 @@ function loadCreditPage() {
   container.innerHTML = `
     <h2>Sentence Reduction/Addition</h2>
     <p><b>Instructions:</b></p>
-    <p>Enter “X” percentage adjustments for the sentence. Use positive numbers only.  </p>
-<p> </p>
+    <p>Select the guilty plea timing from the dropdown. Enter positive numbers only for other fields.</p>
+    <p> </p>
+
     <h3>Reduce by X% for guilty plea:</h3>
-    <input id="guilty" type="number">
-    <p>Reasoning:</p><textarea></textarea>
+    <select id="guilty">
+      <option value="0">No guilty plea (0%)</option>
+      <option value="33.33">Earliest available opportunity (33.33%)</option>
+      <option value="27.5">Before pretrial review / firm trial date (25–30% → 27.5%)</option>
+      <option value="17.5">After final case management, trial date fixed (15–20% → 17.5%)</option>
+      <option value="12.5">Before trial, after FCMC / pretrial review (10–15% → 12.5%)</option>
+      <option value="7.5">Eve of or at trial (5–10% → 7.5%)</option>
+    </select>
+    <p>Reasoning:</p><textarea id="guiltyReason"></textarea>
 <br></br>
     <h3>Increase by X% for other offences incurred:</h3>
-    <input id="other" type="number">
-    <p>Reasoning:</p><textarea></textarea>
+    <input id="other" type="number" min="0" max="100" placeholder="0–100">
+    <p>Reasoning:</p><textarea id="otherReason"></textarea>
 <br></br>
     <h3>Reduce by X% for time spent on remand for offence:</h3>
-    <input id="remand" type="number">
-    <p>Reasoning:</p><textarea></textarea>
+    <input id="remand" type="number" min="0" max="100" placeholder="0–100">
+    <p>Reasoning:</p><textarea id="remandReason"></textarea>
 <br></br>
     <h3>Increase by X% for ancillary and restraining orders, confiscation, compensation, etc.:</h3>
-    <input id="ancillary" type="number">
-    <p>Reasoning:</p><textarea></textarea>
+    <input id="ancillary" type="number" min="0" max="100" placeholder="0–100">
+    <p>Reasoning:</p><textarea id="ancillaryReason"></textarea>
 
     <button onclick="saveCredits()">Next</button>
   `;
@@ -328,22 +343,15 @@ function saveCredits(){
   data.remand = Number(document.getElementById("remand").value);
   data.ancillary = Number(document.getElementById("ancillary").value);
 
-  data.guiltyReason =
-  document.querySelectorAll("#creditPage textarea")[0].value;
-
-  data.otherReason =
-  document.querySelectorAll("#creditPage textarea")[1].value;
-
-  data.remandReason =
-  document.querySelectorAll("#creditPage textarea")[2].value;
-
-  data.ancillaryReason =
-  document.querySelectorAll("#creditPage textarea")[3].value;
+  data.guiltyReason    = document.getElementById("guiltyReason").value;
+  data.otherReason     = document.getElementById("otherReason").value;
+  data.remandReason    = document.getElementById("remandReason").value;
+  data.ancillaryReason = document.getElementById("ancillaryReason").value;
 
   calculateResult();
 }
 
-//helper function for calculations
+// helper functions for calculations
 
 function getCategory(consequence) {
   if (consequence === "Highest") return 1;
@@ -360,14 +368,15 @@ function getLevel(seriousness) {
 // ---------------- FINAL RESULT ----------------
 function calculateResult() {
   data.consequenceFactors =
-[...document.querySelectorAll(".consequenceBox:checked")]
-.map(x => x.parentElement.innerText);
+    [...document.querySelectorAll(".consequenceBox:checked")]
+    .map(x => x.parentElement.innerText);
 
-data.seriousnessFactors =
-[...document.querySelectorAll(".seriousnessBox:checked")]
-.map(x => x.parentElement.innerText);
+  data.seriousnessFactors =
+    [...document.querySelectorAll(".seriousnessBox:checked")]
+    .map(x => x.parentElement.innerText);
 
-data.consequenceReason = document.getElementById("consequenceReason")?.value || "";
+  data.consequenceReason = document.getElementById("consequenceReason")?.value || "";
+
   const MAX = 30;
 
   let category = getCategory(data.consequence);
@@ -381,14 +390,14 @@ data.consequenceReason = document.getElementById("consequenceReason")?.value || 
   let rangeMax = selected.max * MAX;
 
   // Get percentage inputs
-  let aggOff = data.aggOff;
-  let mitOff = Number(document.getElementById("mitOff").value);
+  let aggOff      = data.aggOff;
+  let mitOff      = Number(document.getElementById("mitOff").value);
   let aggOffender = Number(document.getElementById("aggOffender").value);
   let mitOffender = Number(document.getElementById("mitOffender").value);
 
-  let guilty = Number(document.getElementById("guilty").value);
-  let other = Number(document.getElementById("other").value);
-  let remand = Number(document.getElementById("remand").value);
+  let guilty    = Number(document.getElementById("guilty").value);
+  let other     = Number(document.getElementById("other").value);
+  let remand    = Number(document.getElementById("remand").value);
   let ancillary = Number(document.getElementById("ancillary").value);
 
   // Validate inputs
@@ -410,29 +419,39 @@ data.consequenceReason = document.getElementById("consequenceReason")?.value || 
   if (sentence < rangeMin) sentence = rangeMin;
   if (sentence > rangeMax) sentence = rangeMax;
 
+  // Guilty plea label lookup
+  const guiltyLabels = {
+    "0": "No guilty plea",
+    "33.33": "Earliest available opportunity",
+    "27.5": "Before pretrial review / firm trial date (25–30%)",
+    "17.5": "After final case management, trial date fixed (15–20%)",
+    "12.5": "Before trial, after FCMC / pretrial review (10–15%)",
+    "7.5": "Eve of or at trial (5–10%)"
+  };
+  const guiltyLabel = guiltyLabels[String(guilty)] || `${guilty}%`;
+
   // Display results
   let container = document.getElementById("resultPage");
 
-container.innerHTML = `
+  container.innerHTML = `
 
 <h1>Final Sentence: ${sentence.toFixed(2)} years</h1>
 
-
-<br> </br>
+<br></br>
 <h3>Starting Point Calculation</h3>
 
 <p>Maximum sentence = 30 years</p>
 
 <p>
-Starting Point = ${selected.start * 100}% × 30  
+Starting Point = ${(selected.start * 100).toFixed(1)}% × 30
 = ${startingPoint.toFixed(2)} years
 </p>
 
 <p>
-Range = ${selected.min * 100}% – ${selected.max * 100}% of 30  
+Range = ${(selected.min * 100).toFixed(1)}% – ${(selected.max * 100).toFixed(1)}% of 30
 = ${rangeMin.toFixed(2)} – ${rangeMax.toFixed(2)} years
 </p>
-<br> </br>
+<br></br>
 <h3>User's Selections</h3>
 
 <p>Consequence Category: ${data.consequence}</p>
@@ -458,22 +477,22 @@ ${data.seriousnessFactors.map(x => `<li>${x}</li>`).join("")}
 <br></br>
 <h3>Adjustments</h3>
 
-<p>Offence aggravating: ${aggOff}%</p>
+<p>Offence aggravating: ${aggOff}% (max 7%)</p>
 <p>Offence Aggravating Reason:</p>
 <p>${data.aggOffReason}</p>
-<p>Offence mitigating: ${mitOff}%</p>
+<p>Offence mitigating: ${mitOff}% (max 8%)</p>
 <p>Offence Mitigating Reason:</p>
 <p>${data.mitOffReason}</p>
-<p>Offender aggravating: ${aggOffender}%</p>
+<p>Offender aggravating: ${aggOffender}% (max 8%)</p>
 <p>Offender Aggravating Reason:</p>
 <p>${data.aggOffenderReason}</p>
-<p>Offender mitigating: ${mitOffender}%</p>
+<p>Offender mitigating: ${mitOffender}% (max 9%)</p>
 <p>Offender Mitigating Reason:</p>
 <p>${data.mitOffenderReason}</p>
-<br> </br>
+<br></br>
 <h3>Credits and Debits</h3>
 
-<p>Guilty plea credit: ${guilty}%</p>
+<p>Guilty plea credit: ${guiltyLabel} (${guilty}%)</p>
 <p>Guilty Plea Reason:</p>
 <p>${data.guiltyReason}</p>
 <p>Other offences debit: ${other}%</p>
@@ -485,7 +504,6 @@ ${data.seriousnessFactors.map(x => `<li>${x}</li>`).join("")}
 <p>Ancillary orders debit: ${ancillary}%</p>
 <p>Ancillary Orders Reason:</p>
 <p>${data.ancillaryReason}</p>
-
 
 `;
 
